@@ -1056,18 +1056,17 @@ document.getElementById("clienteSeleccionadoCarrito");
 
 if(cajaCliente){
 
-    if(clienteSeleccionado){
+  if(clienteSeleccionado){
 
-        cajaCliente.innerHTML =
-            "👤 Cliente: " + clienteSeleccionado.nombre +
-            "<br>📱 WhatsApp: " + clienteSeleccionado.whatsapp;
+    cajaCliente.innerHTML =
+        "👤 Cliente: " + clienteSeleccionado.nombre;
 
-    }else{
+}else{
 
-        cajaCliente.innerHTML =
-            "👤 Ningún cliente seleccionado";
+    cajaCliente.innerHTML =
+        "👤 Ningún cliente seleccionado";
 
-    }
+}
 
 }
 
@@ -1266,14 +1265,7 @@ function enviarWhatsApp(){
         return;
     }
 
-    let numeroCliente = "";
-
-    if(clienteSeleccionado.whatsapp){
-
-        numeroCliente =
-            clienteSeleccionado.whatsapp.replace(/\D/g, "");
-
-    }
+   
 
     let mensaje = "";
 
@@ -1338,15 +1330,14 @@ function enviarWhatsApp(){
 
     mensaje += "```";
 
-    let enlaceWhatsApp =
-    "https://wa.me/?text=" +
-    encodeURIComponent(mensaje);
+
+let enlaceWhatsApp =
+"https://wa.me/?text=" +
+encodeURIComponent(mensaje);
 
 window.open(enlaceWhatsApp, "_blank");
 
 }
-
-
 
 
 // =========================
@@ -1936,6 +1927,8 @@ function seleccionarCliente(indice){
 </body>
 
 </html>
+
+
 
 
 
