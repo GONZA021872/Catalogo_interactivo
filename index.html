@@ -1225,6 +1225,8 @@ function vaciarCarrito(){
 
     carrito = [];
 
+ localStorage.removeItem("clienteSeleccionadoCODMAR");
+
     actualizarCarrito();
 
     verCarrito();
