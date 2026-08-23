@@ -1059,12 +1059,12 @@ if(cajaCliente){
   if(clienteSeleccionado){
 
     cajaCliente.innerHTML =
-        " Cliente: " + clienteSeleccionado.nombre;
+        "👤 Cliente: " + clienteSeleccionado.nombre;
 
 }else{
 
     cajaCliente.innerHTML =
-        " Ningún cliente seleccionado";
+        "👤 Ningún cliente seleccionado";
 
 }
 
@@ -1271,10 +1271,10 @@ function enviarWhatsApp(){
 
     let mensaje = "";
 
-    mensaje += "*CODMAR*\n";
+    mensaje += " *CODMAR*\n";
     mensaje += "Distribuidora Farmacéutica y Comercializadora\n\n";
 
-   mensaje += "Cliente: " +
+   mensaje += " Cliente: " +
     clienteSeleccionado.nombre + "\n\n";
 
     mensaje += "```text\n";
@@ -1319,16 +1319,27 @@ function enviarWhatsApp(){
 
     });
 
- mensaje +=
-    "----------------------------------------------------\n";
+    mensaje +=
+        "----------------------------------------------------\n";
 
- mensaje = mensaje.replace(/[^\x00-\x7F]/g, "");
+    mensaje +=
+        "TOTAL: $" +
+        total.toLocaleString("es-MX",{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }) +
+        "\n";
+
+    mensaje += "```";
+
 
 let enlaceWhatsApp =
-"https://wa.me/?text=" + encodeURIComponent(mensaje);
+"https://wa.me/?text=" +
+encodeURIComponent(mensaje);
 
 window.open(enlaceWhatsApp, "_blank");
 
+}
 
 
 // =========================
@@ -1918,12 +1929,6 @@ function seleccionarCliente(indice){
 </body>
 
 </html>
-
-
-
-
-
-
 
 
 
