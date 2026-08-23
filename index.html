@@ -1322,24 +1322,10 @@ function enviarWhatsApp(){
     mensaje +=
         "----------------------------------------------------\n";
 
-    mensaje +=
-        "TOTAL: $" +
-        total.toLocaleString("es-MX",{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }) +
-        "\n";
-
-  mensaje += "```";
-
-let enlaceWhatsApp =
+ let enlaceWhatsApp =
 "https://wa.me/?text=" +
 encodeURIComponent(mensaje);
-
-window.open(enlaceWhatsApp, "_blank");
-
-}
-
+   
 
 // =========================
 //      MODAL PRODUCTO
