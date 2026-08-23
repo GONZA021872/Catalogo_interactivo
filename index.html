@@ -1319,13 +1319,17 @@ function enviarWhatsApp(){
 
     });
 
-    mensaje +=
-        "----------------------------------------------------\n";
+ mensaje +=
+    "----------------------------------------------------\n";
 
- let enlaceWhatsApp =
-"https://wa.me/?text=" +
-encodeURIComponent(mensaje);
-   
+let enlaceWhatsApp =
+"https://wa.me/?text=" + encodeURIComponent(mensaje);
+
+window.open(enlaceWhatsApp, "_blank");
+
+}  
+ 
+
 
 // =========================
 //      MODAL PRODUCTO
