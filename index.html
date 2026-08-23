@@ -1322,13 +1322,13 @@ function enviarWhatsApp(){
  mensaje +=
     "----------------------------------------------------\n";
 
+ mensaje = mensaje.replace(/[^\x00-\x7F]/g, "");
+
 let enlaceWhatsApp =
 "https://wa.me/?text=" + encodeURIComponent(mensaje);
 
 window.open(enlaceWhatsApp, "_blank");
 
-}  
- 
 
 
 // =========================
