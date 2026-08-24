@@ -1251,9 +1251,7 @@ function cerrarCarrito(){
 function enviarWhatsApp(){
 
     if(carrito.length === 0){
-
         alert("El carrito está vacío.");
-
         return;
     }
 
@@ -1261,26 +1259,19 @@ function enviarWhatsApp(){
         JSON.parse(localStorage.getItem("clienteSeleccionadoCODMAR"));
 
     if(!clienteSeleccionado){
-
         alert("Primero selecciona un cliente.");
-
         return;
     }
 
-   
-
     let mensaje = "";
 
-    mensaje += " *CODMAR*\n";
+    mensaje += "*CODMAR*\n";
     mensaje += "Distribuidora Farmacéutica y Comercializadora\n\n";
 
-   mensaje += " Cliente: " +
-    clienteSeleccionado.nombre + "\n\n";
-
-    mensaje += "```text\n";
+    mensaje += "Cliente: " +
+        clienteSeleccionado.nombre + "\n\n";
 
     mensaje += "Cant  Artículo              P.Unit      Importe\n";
-
     mensaje += "----------------------------------------------------\n";
 
     let total = 0;
@@ -1330,14 +1321,14 @@ function enviarWhatsApp(){
         }) +
         "\n";
 
-    mensaje += "```";
+    let enlaceWhatsApp =
+        "https://wa.me/?text=" +
+        encodeURIComponent(mensaje);
 
+    console.log(mensaje);
+    console.log(enlaceWhatsApp);
 
-let enlaceWhatsApp =
-"https://wa.me/?text=" +
-encodeURIComponent(mensaje);
-
-window.location.href = enlaceWhatsApp;
+    window.open(enlaceWhatsApp, "_blank");
 }
 
 
