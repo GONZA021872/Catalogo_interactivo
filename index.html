@@ -1,1928 +1,1030 @@
- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO D MAR</title>
 
-  <title>Catalogo CO D MAR</title>
-
-<style>
-
-/* ========================= */
-/*          CSS CODMAR        */
-/* ========================= */
-
-
-body {
-    font-family: Arial, sans-serif;
-    margin:0;
-    padding:20px;
-    background:#f5f5f5;
-}
-
-/* MARCA CODMAR */
-
-.marca{
-    text-align:center;
-    margin-top:20px;
-}
-
-.logo-icono{
-    font-size:48px;
-    margin-bottom:5px;
-}
-
-.marca h1{
-    font-size:80px;
-    font-weight:900;
-    margin:0;
-    letter-spacing:4px;
-    color:#111;
-}
-
-.marca p{
-    font-size: 40px;          /* Más grande */
-    font-weight: bold;
-    color: #555;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    letter-spacing: 2px;      /* Más separación entre letras */
-    line-height: 1.4;         /* Hace que la letra se vea más alta */
-    text-transform: uppercase;/* Todo en mayúsculas, más profesional */
-}
-
-
-/* BUSCADOR */
-
-#buscar{
-    width:90%;
-    max-width:700px;
-    display:block;
-    margin:20px auto;
-    padding:18px 20px;
-    font-size:28px;
-    border:2px solid #ccc;
-    border-radius:12px;
-    outline:none;
-}
-/* CATALOGO */
-
-#catalogo{
-    text-align:center;
-}
-
-
-.producto{
-    border:1px solid #ccc;
-    background:white;
-    border-radius:10px;
-    padding:8px;
-    margin:8px;
-    width:160px;
-    display:inline-block;
-    text-align:center;
-    vertical-align:top;
-    box-shadow:0 2px 5px rgba(0,0,0,.15);
-}
-
-.producto img{
-    width:110px;
-    height:110px;
-    object-fit:contain;
-
-}
-
-.producto h3{
-    font-size:14px;
-    margin:6px 0;
-    min-height:36px;
-}
-
-.producto p{
-    font-size:18px;
-    color:#d32f2f;
-    font-weight:bold;
-    margin:6px 0;
-}
-
-
-
-
-/* BOTON AGREGAR CARRITO */
-
-.boton-carrito{
-    display:block;
-    width:110%;
-    margin-top:6px;
-    padding:12px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    font-size:18px;
-    cursor:pointer;
-}
-
-
-
-/* BOTON CARRITO PRINCIPAL */
-
-#verCarrito{
-    display:block;
-    width:40%;
-    margin:25px auto;
-    height:100px;
-    background:#ff9800;
-    color:white;
-    border:none;
-    border-radius:15px;
-    font-size:30px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-#verCarrito:hover{
-    transform:scale(1.05);
-    background:#f57c00;
-}
-
-/* VENTANA DEL CARRITO */
-
-#carritoVentana{
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:420px;
-    max-height:500px;
-    overflow-y:auto;
-    background:#fff;
-    border-radius:10px;
-    padding:20px;
-    box-shadow:0 0 20px rgba(0,0,0,.4);
-    z-index:9999;
-}
-
-
-
-#listaCarrito{
-    margin-top:15px;
-}
-
-
-
-#totalCarrito{
-    margin-top:15px;
-    font-size:20px;
-    font-weight:bold;
-    color:#d32f2f;
-}
-
-
-
-/* BOTONES DEL CARRITO */
-
-.botonesCarrito{
-    margin-top:20px;
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-
-.botonesCarrito button{
-    flex:1;
-    padding:10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-
-
-#vaciarCarrito{
-    background:#d32f2f;
-    color:white;
-}
-
-
-
-#enviarWhatsApp{
-    background:#25D366;
-    color:white;
-}
-
-
-
-#cerrarCarrito{
-    background:#666;
-    color:white;
-}
-
-
-
-#carritoVentana button{
-    margin:5px;
-}
-
-#volverCatalogo{
-    display:none;
-    width:60%;
-    max-width:500px;
-    margin:20px auto;
-    padding:18px 25px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    border-radius:12px;
-    font-size:24px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-
-#volverCatalogo:hover{
-    background:#0b5ed7;
-}
-
-
-
-/* ===== MODAL PRODUCTO ===== */
-
-.modal{
-    display:none;
-    position:fixed;
-    z-index:9999;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.7);
-}
-
-.modal-contenido{
-
-    background:white;
-
-    width:90%;
-    max-width:420px;
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    border-radius:15px;
-
-    padding:20px;
-
-    text-align:center;
-
-    animation:aparecer .25s;
-}
-
-.modal-contenido img{
-
-    width:420px;
-
-    height:420px;
-
-    object-fit:contain;
-
-}
-
-#modalNombre{
-
-    font-size:24px;
-    margin:15px 0;
-
-}
-
-#modalPrecio{
-
-    font-size:26px;
-
-    color:#e53935;
-
-    font-weight:bold;
-
-}
-
-#agregarModal{
-
-    background:#28a745;
-
-    color:white;
-
-    border:none;
-
-    padding:15px 25px;
-
-    border-radius:10px;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-}
-
-#cerrarModal{
-
-    position:absolute;
-    right:15px;
-    top:10px;
-    font-size:35px;
-    cursor:pointer;
-
-}
-
-
-
-/* CATEGORÍAS */
-
-.categorias{
-
-    display:flex;
-    flex-wrap:nowrap;
-    justify-content:flex-start;
-    gap:12px;
-    width:100%;
-    margin:20px auto;
-    padding:0 10px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    white-space:nowrap;
-    scroll-behavior:smooth;
-    -webkit-overflow-scrolling:touch;
-
-}
-
-
-.categorias::-webkit-scrollbar{
-
-    display:none;
-
-}
-
-
-.categorias button{
-
-    flex:0 0 auto;
-    min-width:200px;
-    height:85px;
-    padding:0 30px;
-    font-size:20px;
-    border-radius:12px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-}
-
-
-
-/* ========================= */
-/*      PÁGINA CARRITO        */
-/* ========================= */
-
-.categorias button:hover{
-
-    background:#0b5ed7;
-
-}
-
-
-
-/* CELULAR */
-
-@media (max-width:768px){
-
- .categorias{
-
-    display:flex;
-    flex-direction:row;
-    flex-wrap:nowrap;
-    gap:12px;
-    width:100%;
-    margin:20px auto;
-    padding:25px 10px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    white-space:nowrap;
-    -webkit-overflow-scrolling:touch;
-
-}
-
-
-    .categorias::-webkit-scrollbar{
-
-        display:none;
-
-    }
-
-
-    .categorias button{
-
-    flex:0 0 auto;
-    min-width:200px;
-    height:60px;
-    padding:0 30px;
-    font-size:20px;
-    border-radius:12px;
-    background:#0d6efd;
-    color:white;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-}
-
-}
-
-/* ========================= */
-/*      PÁGINA CARRITO        */
-/* ========================= */
-
-#paginaCarrito{
-
-    display:none;
-    width:95%;
-    max-width:900px;
-    margin:20px auto;
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.2);
-
-}
-
-.productoCarrito{
-
-    display:flex;
-    align-items:center;
-    gap:15px;
-    border-bottom:1px solid #ddd;
-    padding:15px 0;
-
-}
-
-.productoCarrito img{
-
-    width:90px;
-    height:90px;
-    object-fit:contain;
-
-}
-
-.infoProducto{
-
-    flex:1;
-
-}
-
-.infoProducto h3{
-
-    margin:0;
-    font-size:20px;
-
-}
-
-.infoProducto p{
-
-    margin:8px 0;
-    color:#d32f2f;
-    font-weight:bold;
-    font-size:20px;
-
-}
-
-
-.filaCarrito{
-
-    display:grid;
-    grid-template-columns:140px 1fr 100px 120px 70px;
-    align-items:center;
-    gap:10px;
-    border-bottom:1px solid #ddd;
-    padding:12px 0;
-
-}
-
-.colImagen{
-
-    width:70px;
-    flex-shrink:0;
-
-}
-
-.colImagen img{
-
-    width:60px;
-    height:60px;
-    object-fit:contain;
-    display:block;
-
-}
-
-.colCantidad{
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-
-}
-
-.colCantidad span{
-    font-size:22px;
-    font-weight:bold;
-}
-
-
-.colCantidad button{
-    width:40px;
-    height:40px;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.colProducto{
-    font-weight:bold;
-    font-size:20px;
-}
-
-
-.colPrecio,
-.colImporte{
-    text-align:center;
-    font-weight:bold;
-    font-size:20px;
-}
-.colImporte{
-
-    color:#d32f2f;
-
-}
-
-.colEliminar{
-
-    text-align:center;
-
-}
-
-.colEliminar button{
-    background:#d32f2f;
-    color:white;
-    border:none;
-    border-radius:8px;
-    padding:10px 14px;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.encabezadoCarrito{
-
-    display:grid;
-    grid-template-columns:140px 1fr 100px 120px 70px;
-    gap:10px;
-    font-weight:bold;
-    background:#0d6efd;
-    color:white;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:10px;
-    text-align:center;
-
-}
-
-    /* CARRITO EN CELULAR */
-
-#carritoVentana{
-
-    width:90%;
-    max-width:500px;
-    max-height:80vh;
-    padding:25px;
-    border-radius:15px;
-
-}
-
-
-#carritoVentana h2{
-
-    font-size:32px;
-
-}
-
-
-#listaCarrito{
-
-    font-size:22px;
-
-}
-
-
-#totalCarrito{
-
-    font-size:28px;
-
-}
-
-
-.botonesCarrito{
-
-    flex-direction:column;
-    gap:15px;
-
-}
-
-
-.botonesCarrito button{
-
-    width:100%;
-    padding:18px;
-    font-size:22px;
-
-}
-
-
-
-
-</style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-
-    <div class="marca">
-    
-     <h1>CO D MAR</h1>
-
-    <p>Distribuidora Farmacéutica y Comercializadora</p>
-   </div>
-
-
-<!-- Categorías -->
-
-<div class="categorias">
-
-    <button onclick="mostrarMedicamentos()">
-        💊 Medicamentos
-    </button>
-
-    <button onclick="mostrarMaterial()">
-        🩹 Material de Curación
-    </button>
-
-    <button onclick="mostrarPerfumeria()">
-    🧴 Perfumería
-    </button>
-
-
-    <button onclick="mostrarMiscelaneos()">
-    📦 Misceláneos
-    </button>
-
-    <button onclick="mostrarSimilares()">
-        🔄 Similares
-    </button>
-
-    <button onclick="mostrarPatente()">
-        💎 Patente
-    </button>
+    <!-- ========================================= -->
+    <!--          ACCESO DE USUARIO CODMAR         -->
+    <!-- ========================================= -->
 
     
+<div id="pantalla-login" style="display: none;">
+
+    <div class="login-contenedor">
+
+
+            <div class="login-encabezado">
+
+                <div class="login-icono">
+                    <svg
+                        viewBox="0 0 24 24"
+                        width="38"
+                        height="38"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+
+                        <path d="M3 10 12 3l9 7"></path>
+                        <path d="M5 9v11h14V9"></path>
+                        <path d="M9 20v-7h6v7"></path>
+
+                    </svg>
+                </div>
+
+                <h1>CODMAR</h1>
+
+                <p>PLATAFORMA DE GESTIÓN COMERCIAL</p>
+
+            </div>
+
+        
+<div class="login-formulario">
+
+    <h2>Acceso a tu cuenta</h2>
+
+    <p class="login-descripcion">
+        Ingresa tus datos para continuar.
+    </p>
+
+    <label for="login-email">
+        Correo electrónico
+    </label>
+
+    <input
+        type="email"
+        id="login-email"
+        placeholder="correo@negocio.com"
+        autocomplete="username"
+        required>
+
+    <label for="login-password">
+        Contraseña
+    </label>
+
+   
+<div class="contenedor-password">
+    <input
+        type="password"
+        id="login-password"
+        placeholder="Ingresa tu contraseña"
+        autocomplete="current-password"
+        required>
+
+    <button
+        type="button"
+        id="mostrar-password"
+        aria-label="Mostrar contraseña"
+        title="Mostrar contraseña">
+        <svg viewBox="0 0 24 24"
+             width="23"
+             height="23"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M4 4 20 20"/>
+        </svg>
+    </button>
 </div>
 
 
+    <button
+        type="button"
+        id="boton-login">
+        INICIAR SESIÓN
+    </button>
 
-<!-- Buscador de productos -->
-
-<input 
-type="text"
-id="buscar"
-placeholder="🔍 Buscar producto...">
-
-
-<button id="volverCatalogo">
-    ← Volver al catálogo
+    
+    <!-- BOTÓN PARA RECUPERAR CONTRASEÑA -->
+<button
+    type="button"
+    id="boton-mostrar-recuperacion">
+    ¿OLVIDASTE TU CONTRASEÑA?
 </button>
 
 
-<!-- Botón para abrir carrito -->
-
-<button id="verCarrito" onclick="verCarrito()">
-
-🛒 Carrito (0)
-
+<!-- BOTÓN PARA MOSTRAR EL REGISTRO -->
+<button
+    type="button"
+    id="boton-mostrar-registro">
+    REGISTRAR MI NEGOCIO
 </button>
 
 
-<!-- Aquí aparecerán los productos del catálogo -->
-
-<div id="catalogo"></div>
-
-
-<!-- ========================= -->
-<!--       VENTANA CARRITO      -->
-<!-- ========================= -->
+<!-- MENSAJE DEL INICIO DE SESIÓN -->
+<div
+    id="mensaje-login"
+    role="status"
+    aria-live="polite">
+</div>
 
 
-<div id="carritoVentana" style="display:none;">
-
-
-    <h2>🛒 Mi carrito</h2>
-
-
-    <div id="listaCarrito"></div>
-
-
-    <h3 id="totalCarrito"></h3>
-
-
-
-    <div class="botonesCarrito">
-
-
-        <button 
-        id="vaciarCarrito"
-        onclick="vaciarCarrito()">
-
-            🗑 Vaciar carrito
-
-        </button>
-
-
-
-        <button
-        id="enviarWhatsApp"
-        onclick="enviarWhatsApp()">
-
-            📲 Enviar pedido
-
-        </button>
-
-
-
-        <button
-        id="cerrarCarrito"
-        onclick="cerrarCarrito()">
-
-            ❌ Cerrar
-
-        </button>
-
-
-    </div>
+<!-- MENSAJE DE SEGURIDAD -->
+<p class="login-seguridad">
+    Acceso seguro a tu negocio
+</p>
 
 
 </div>
 
+    </div>
 
-<!-- ========================= -->
-<!--       PÁGINA CLIENTES     -->
-<!-- ========================= -->
+</div>
+<!-- FIN DE pantalla-login -->
 
-<div id="paginaClientes" style="display:none;">
 
-    <h2 style="text-align:center; font-size:32px;">
-        👥 Mis Clientes
-    </h2>
+<!-- VENTANA INDEPENDIENTE DE RECUPERACIÓN -->
+<div id="pantalla-recuperacion" hidden>
 
-    <div style="text-align:center; margin-top:30px;">
+    <div class="login-contenedor">
 
-        <button id="agregarCliente">
-            ➕ Agregar cliente
+        <div class="login-encabezado">
+            <h1>CODMAR</h1>
+            <p>Acceso seguro a tu negocio</p>
+        </div>
+
+        <div class="login-formulario">
+
+            <!-- SOLICITAR ENLACE DE RECUPERACIÓN -->
+            <form id="formulario-recuperacion">
+
+                <h2>Recuperar cuenta</h2>
+
+                <p>
+                    Introduce tu correo electrónico para recibir
+                    el enlace de recuperación.
+                </p>
+
+                <label for="correo-recuperacion">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo-recuperacion"
+                    autocomplete="email"
+                    placeholder="tu@correo.com"
+                    required>
+
+                <button
+                    type="button"
+                    id="boton-enviar-recuperacion">
+                    ENVIAR ENLACE DE RECUPERACIÓN
+                </button>
+
+                <button
+                    type="button"
+                    id="boton-cancelar-recuperacion">
+                    VOLVER AL ACCESO
+                </button>
+
+                <div
+                    id="mensaje-recuperacion"
+                    role="status"
+                    aria-live="polite">
+                </div>
+
+            </form>
+
+
+            <!-- FORMULARIO PARA ESTABLECER LA CONTRASEÑA NUEVA -->
+            <div id="formulario-nueva-password" hidden>
+
+                <h2>Crear nueva contraseña</h2>
+
+                <label for="nueva-password">
+                    Nueva contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="nueva-password"
+                    autocomplete="new-password"
+                    placeholder="Escribe la nueva contraseña"
+                    minlength="6"
+                    required>
+
+                <label for="confirmar-nueva-password">
+                    Confirmar contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmar-nueva-password"
+                    autocomplete="new-password"
+                    placeholder="Repite la nueva contraseña"
+                    minlength="6"
+                    required>
+
+                <button
+                    type="button"
+                    id="boton-guardar-nueva-password">
+                    GUARDAR NUEVA CONTRASEÑA
+                </button>
+
+                <div
+                    id="mensaje-nueva-password"
+                    role="status"
+                    aria-live="polite">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!--       PANTALLA INDEPENDIENTE DE REGISTRO  -->
+<!-- ========================================= -->
+
+<div id="pantalla-registro" style="display: none;">
+
+    <div class="login-contenedor">
+
+        <div class="login-encabezado">
+
+            <div class="login-icono">
+                <svg
+                    viewBox="0 0 24 24"
+                    width="38"
+                    height="38"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true">
+
+                    <path d="M3 10 12 3l9 7"></path>
+                    <path d="M5 9v11h14V9"></path>
+                    <path d="M9 20v-7h6v7"></path>
+
+                </svg>
+            </div>
+
+            <h1>CODMAR</h1>
+            <p>PLATAFORMA DE GESTIÓN COMERCIAL</p>
+
+        </div>
+
+        <div class="login-formulario">
+
+            <div id="formulario-registro">
+
+                <h2>Registrar negocio</h2>
+
+                <label for="registro-nombre-comercial">
+                    Nombre comercial
+                </label>
+
+                <input
+                    type="text"
+                    id="registro-nombre-comercial"
+                    placeholder="Nombre de tu negocio"
+                    autocomplete="organization"
+                    required>
+
+                <label for="registro-email">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="registro-email"
+                    placeholder="correo@negocio.com"
+                    autocomplete="email"
+                    required>
+
+                <label for="registro-password">
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="registro-password"
+                    placeholder="Crea una contraseña"
+                    autocomplete="new-password"
+                    required>
+
+                <label for="registro-confirmar-password">
+                    Confirmar contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="registro-confirmar-password"
+                    placeholder="Confirma tu contraseña"
+                    autocomplete="new-password"
+                    required>
+
+                <button
+                    type="button"
+                    id="boton-registrar-negocio">
+                    CREAR CUENTA
+                </button>
+
+                <button
+                    type="button"
+                    id="boton-cancelar-registro">
+                    VOLVER AL ACCESO
+                </button>
+
+                <div
+                    id="mensaje-registro"
+                    role="status"
+                    aria-live="polite">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- FIN DE pantalla-registro -->
+
+
+
+
+    <!-- ========================================= -->
+    <!--          PLATAFORMA COMERCIAL             -->
+    <!-- ========================================= -->
+
+    <div id="pagina-inicio" style="display: none;">
+
+        <!-- FRANJA SUPERIOR -->
+
+        <div class="barra-inicio-superior cargando">
+
+            <button
+                class="boton-menu"
+                id="boton-menu"
+                type="button">
+                ☰ Menú
+            </button>
+
+            <div class="buscador" id="buscador">
+
+                <button
+                    class="boton-busqueda"
+                    id="boton-busqueda"
+                    type="button">
+                    🔍
+                </button>
+
+                <input
+                    type="text"
+                    id="campo-busqueda"
+                    placeholder="Buscar...">
+
+            </div>
+
+            <button
+                class="boton-carrito"
+                aria-label="Carrito"
+                type="button">
+
+                <span
+                    class="bolsita"
+                    id="icono-bolsita">
+                </span>
+
+                <span
+                    class="icono-carrito"
+                    id="icono-carrito">
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- ESPACIO CENTRAL -->
+
+        <div class="contenido-inicio">
+        </div>
+
+
+        <!-- FRANJA INFERIOR -->
+
+        <div class="barra-inicio-inferior">
+        </div>
+
+        
+
+<!-- MENÚ DESPLEGABLE -->
+
+<div class="panel-menu" id="panel-menu">
+
+    <div class="opcion-menu">
+        Inicio
+    </div>
+
+    <div class="opcion-menu">
+        Encabezado
+    </div>
+
+    <div class="opcion-menu" id="boton-categorias">
+        Categorías
+    </div>
+
+    <div class="opcion-menu" id="boton-configuracion">Configuración</div>
+
+
+    <div class="opcion-menu" id="boton-salir">
+        Salir
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!--       CONFIGURACIÓN DE CATEGORÍAS         -->
+<!-- ========================================= -->
+
+<div class="formulario-inicio" id="formulario-categorias">
+
+    <h2>CONFIGURACIÓN DE CATEGORÍAS</h2>
+
+    <p id="titulo-accion-categoria">
+        Escribe el nombre de la categoría:
+    </p>
+
+    <input
+        type="text"
+        id="nombre-categoria"
+        placeholder="Ej. Medicamentos"
+        maxlength="60"
+        autocomplete="off"
+    >
+
+    <div class="botones-categorias">
+
+        <button id="aceptar-categoria" type="button">
+            ACEPTAR
         </button>
 
-        <button id="volverCarritoClientes">
-            ⬅ Volver al carrito
+        <button id="editar-categoria" type="button">
+            EDITAR
+        </button>
+
+        <button id="cerrar-categorias" type="button">
+            CERRAR
         </button>
 
     </div>
 
-    <!-- FORMULARIO AGREGAR CLIENTE -->
+    <p id="mensaje-categorias" aria-live="polite"></p>
 
-    <div id="formularioCliente" style="display:none; margin:30px auto; max-width:500px;">
+    <div id="lista-categorias-gestion"></div>
 
-        <h3 style="text-align:center;">
-            ➕ Agregar cliente
-        </h3>
+</div>
 
-        <label>
-            Nombre del cliente
+
+
+
+        <!-- ========================================= -->
+        <!--          CONFIGURACIÓN DE INICIO          -->
+        <!-- ========================================= -->
+
+        <div class="formulario-inicio" id="formulario-inicio">
+
+            <h2>CONFIGURACIÓN DE INICIO</h2>
+
+            <div class="opcion-color">
+                <label for="color-franjas">Color de franjas</label>
+                <input
+                    type="color"
+                    id="color-franjas"
+                    value="#18a69f">
+            </div>
+
+            <div class="opcion-color">
+                <label for="color-boton-menu">Color del botón Menú</label>
+                <input
+                    type="color"
+                    id="color-boton-menu"
+                    value="#159c96">
+            </div>
+
+            <div class="opcion-color">
+                <label for="color-texto-menu">Color del texto Menú</label>
+                <input
+                    type="color"
+                    id="color-texto-menu"
+                    value="#f2f2f2">
+            </div>
+
+            <div class="opcion-color">
+                <label for="color-panel-menu">Color del menú desplegable</label>
+                <input
+                    type="color"
+                    id="color-panel-menu"
+                    value="#D8E2EE">
+            </div>
+
+            <button id="aceptar-inicio" type="button">
+                ACEPTAR
+            </button>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!--        CONFIGURACIÓN DE ENCABEZADO        -->
+        <!-- ========================================= -->
+
+        <div class="formulario-inicio" id="formulario-cabecera">
+
+            <h2>CONFIGURACIÓN DE ENCABEZADO</h2>
+
+            <div class="opcion-encabezado">
+                <button
+                    type="button"
+                    id="boton-configurar-logotipo">
+                    CONFIGURAR LOGOTIPO
+                </button>
+            </div>
+
+            <div class="opcion-encabezado">
+                <button
+                    type="button"
+                    id="boton-nombre-comercial">
+                    MOSTRAR NOMBRE COMERCIAL
+                </button>
+            </div>
+
+            <div class="opcion-encabezado">
+                <button
+                    type="button"
+                    id="boton-configurar-carrito">
+                    MOSTRAR CARRITO
+                </button>
+            </div>
+
+            <div class="opcion-encabezado">
+                <button
+                    type="button"
+                    id="boton-configurar-buscador">
+                    MOSTRAR BUSCADOR
+                </button>
+            </div>
+
+            <button id="aceptar-cabecera" type="button">
+                ACEPTAR
+            </button>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!--          CONFIGURACIÓN DEL CARRITO        -->
+        <!-- ========================================= -->
+
+        <div class="formulario-inicio" id="formulario-carrito">
+
+            <h2>CONFIGURACIÓN DEL CARRITO</h2>
+
+            <div class="opcion-encabezado">
+
+                <label for="mostrar-carrito">
+                    Mostrar carrito
+                </label>
+
+                <input
+                    type="checkbox"
+                    id="mostrar-carrito"
+                    checked>
+
+            </div>
+
+            <div class="opciones-tipo-carrito">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="tipo-carrito"
+                        id="tipo-bolsita"
+                        value="bolsita"
+                        checked>
+                    Bolsita
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="tipo-carrito"
+                        id="tipo-carrito"
+                        value="carrito">
+                    Carrito
+                </label>
+
+            </div>
+
+            <div class="opcion-encabezado posicion-carrito-control">
+
+                <label>Posición del carrito</label>
+
+                <div class="control-posicion-carrito">
+
+                    <button
+                        type="button"
+                        id="flecha-carrito-arriba">
+                        ▲
+                    </button>
+
+                    <button
+                        type="button"
+                        id="flecha-carrito-izquierda">
+                        ◀
+                    </button>
+
+                    <button
+                        type="button"
+                        id="centro-carrito">
+                    </button>
+
+                    <button
+                        type="button"
+                        id="flecha-carrito-derecha">
+                        ▶
+                    </button>
+
+                    <button
+                        type="button"
+                        id="flecha-carrito-abajo">
+                        ▼
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button id="aceptar-carrito" type="button">
+                ACEPTAR
+            </button>
+
+        </div>
+
+<!-- ========================================= -->
+<!--       CONFIGURACIÓN DEL BUSCADOR          -->
+<!-- ========================================= -->
+
+<div class="formulario-inicio" id="formulario-buscador">
+
+    <h2>CONFIGURACIÓN DEL BUSCADOR</h2>
+
+    <!-- MOSTRAR U OCULTAR -->
+
+    <div class="opcion-encabezado">
+
+        <label for="mostrar-buscador">
+            Mostrar buscador
         </label>
 
         <input
-            type="text"
-            id="nombreCliente"
-            placeholder="Escribe el nombre"
-            style="width:100%; padding:12px; margin:8px 0 15px;">
+            type="checkbox"
+            id="mostrar-buscador"
+            checked>
 
-        <label>
-            📱 Número de WhatsApp
+    </div>
+
+    <!-- POSICIÓN DEL BUSCADOR -->
+
+    <div class="opcion-encabezado posicion-buscador-control">
+
+        <label>Posición del buscador</label>
+
+        <div class="control-posicion-buscador">
+
+            <button
+                type="button"
+                id="flecha-buscador-arriba"
+                aria-label="Mover arriba">▲</button>
+
+            <button
+                type="button"
+                id="flecha-buscador-izquierda"
+                aria-label="Mover izquierda">◀</button>
+
+            <span id="centro-buscador">●</span>
+
+            <button
+                type="button"
+                id="flecha-buscador-derecha"
+                aria-label="Mover derecha">▶</button>
+
+            <button
+                type="button"
+                id="flecha-buscador-abajo"
+                aria-label="Mover abajo">▼</button>
+
+        </div>
+
+    </div>
+
+    <!-- TAMAÑO DEL BUSCADOR -->
+
+    <div class="opcion-encabezado tamano-buscador-control">
+
+        <label>Tamaño del buscador</label>
+
+        <div class="control-flechas-tamano-buscador">
+
+            <button
+                type="button"
+                id="reducir-buscador"
+                aria-label="Reducir tamaño">◀</button>
+
+            <button
+                type="button"
+                id="agrandar-buscador"
+                aria-label="Agrandar tamaño">▶</button>
+
+        </div>
+
+    </div>
+
+    <!-- ACEPTAR -->
+
+    <button
+        type="button"
+        id="aceptar-buscador">
+        ACEPTAR
+    </button>
+
+</div>
+
+   
+<!-- ========================================= -->
+<!--          CONFIGURACIÓN DEL LOGOTIPO      -->
+<!-- ========================================= -->
+
+<div class="formulario-inicio" id="formulario-logotipo">
+
+    <h2>CONFIGURACIÓN DEL LOGOTIPO</h2>
+
+    <div class="opcion-encabezado">
+
+        <label for="mostrar-logotipo">
+            Mostrar logotipo
         </label>
 
         <input
-            type="tel"
-            id="whatsappCliente"
-            placeholder="Ejemplo: 2281234567"
-            style="width:100%; padding:12px; margin:8px 0 15px;">
-
-        <div style="text-align:center;">
-
-            <button id="guardarCliente">
-                💾 Guardar
-            </button>
-
-            <button id="cancelarCliente">
-                ❌ Cancelar
-            </button>
-
-        </div>
+            type="checkbox"
+            id="mostrar-logotipo"
+            checked>
 
     </div>
 
-    <!-- LISTA DE CLIENTES -->
-
-    <div id="listaClientes"></div>
-
-</div>
-
-
-<!-- ===== VENTANA DEL PRODUCTO ===== -->
-
-<div id="modalProducto" class="modal">
-
-    <div class="modal-contenido">
-
-        <span id="cerrarModal">&times;</span>
-
-        <img id="modalImagen" src="" alt="Producto">
-
-        <h2 id="modalNombre"></h2>
-
-        <p id="modalPrecio"></p>
-
-        <button id="agregarModal">
-
-            🛒 Agregar al carrito
-
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ========================= -->
-<!--       PÁGINA CARRITO     -->
-<!-- ========================= -->
-
-<div id="paginaCarrito" style="display:none;">
-
-    <h2 style="text-align:center; font-size:32px;">
-        🛒 Mi Carrito
-    </h2>
-
-    <div id="clienteSeleccionadoCarrito"
-        style="
-            text-align:center;
-            margin:15px auto;
-            padding:12px;
-            max-width:600px;
-            background:#e8f1ff;
-            border-radius:10px;
-            font-size:18px;
-            font-weight:bold;
-        ">
-    </div>
-
-    <div id="listaCarritoPagina"></div>
-
-    <h2 id="totalPagina"
-        style="text-align:center; color:#d32f2f;">
-    </h2>
-
-    <div style="text-align:center; margin-top:30px;">
-
-        <button id="enviarWhatsAppPagina">
-            📲 Enviar pedido
-        </button>
-
-        <button id="verClientes" onclick="verClientes()">
-            👥 Clientes
-        </button>
-
-        <button id="vaciarCarritoPagina">
-            🗑 Vaciar carrito
-        </button>
-
-        <button id="volverCatalogoPagina">
-            ⬅ Volver al catálogo
-        </button>
-
-    </div>
-
-</div>
-
-
-
-
-
-<script>
-
-
-
-// =========================
-//       JAVASCRIPT CODMAR
-// =========================
-
-
-
-
-// =========================
-//       CARRITO
-// =========================
-
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-
-// Actualiza el número del botón carrito
-
-function actualizarCarrito(){
-
-    document.getElementById("verCarrito").innerHTML =
-    "🛒 Carrito (" + carrito.length + ")";
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-}
-
-
-
-// Agregar productos
-
-function agregarCarrito(nombre, precio, imagen){
-
-
-    precio = parseFloat(precio.replace("$","").trim());
-
-
-    let productoExistente = carrito.find(function(producto){
-
-        return producto.nombre === nombre;
-
-    });
-
-
-
-    if(productoExistente){
-
-
-        productoExistente.cantidad++;
-
-
-    }else{
-
-
-     carrito.push({
-
-    nombre:nombre,
-    precio:precio,
-    cantidad:1,
-    imagen:imagen
-
-
-});
-
-    }
-
-
-
-    actualizarCarrito();
-
-
-
-    alert(
-        nombre +
-        " agregado al carrito.\n\nProductos en el carrito: "
-        + carrito.length
-    );
-
-
-}
-
-
-
-// Mostrar carrito
-
-function verCarrito(){
-
-    // Ocultar catálogo
-    document.getElementById("catalogo").style.display = "none";
-
-    // Ocultar botón del carrito
-    document.getElementById("verCarrito").style.display = "none";
-
-    // Mostrar página del carrito
-    document.getElementById("paginaCarrito").style.display = "block";
-
-
-// Mostrar cliente seleccionado
-let clienteSeleccionado =
-    JSON.parse(localStorage.getItem("clienteSeleccionadoCODMAR"));
-
-let cajaCliente =
-document.getElementById("clienteSeleccionadoCarrito");
-
-if(cajaCliente){
-
-  if(clienteSeleccionado){
-
-    cajaCliente.innerHTML =
-        "👤 Cliente: " + clienteSeleccionado.nombre;
-
-}else{
-
-    cajaCliente.innerHTML =
-        "👤 Ningún cliente seleccionado";
-
-}
-
-}
-
-
-    let contenido = "";
-    let total = 0;
-
-    carrito.forEach(function(producto){
-
-        contenido += `
-
-<div class="filaCarrito">
-
-    <div class="colCantidad">
-        <button onclick="disminuirCantidad('${producto.nombre}')">➖</button>
-        <span>${producto.cantidad}</span>
-        <button onclick="aumentarCantidad('${producto.nombre}')">➕</button>
-    </div>
-
-    <div class="colProducto">
-        ${producto.nombre}
-    </div>
-
-    <div class="colPrecio">
-        $${producto.precio.toFixed(2)}
-    </div>
-
-    <div class="colImporte">
-        $${(producto.precio * producto.cantidad).toFixed(2)}
-    </div>
-
-    <div class="colEliminar">
-        <button onclick="eliminarProducto('${producto.nombre}')">🗑</button>
-    </div>
-
-</div>
-
-`;
-
-        total += producto.precio * producto.cantidad;
-
-    });
-
-    if(carrito.length === 0){
-
-        document.getElementById("listaCarritoPagina").innerHTML =
-        "<h3 style='text-align:center;'>🛒 El carrito está vacío</h3>";
-
-        document.getElementById("totalPagina").innerHTML = "";
-
-    }else{
-
-        document.getElementById("listaCarritoPagina").innerHTML =
-
-        `
-
-<div class="encabezadoCarrito">
-
-    <div>Cantidad</div>
-    <div>Producto</div>
-    <div>Precio</div>
-    <div>Importe</div>
-    <div></div>
-
-</div>
-
-` + contenido;
-
-        document.getElementById("totalPagina").innerHTML =
-        "TOTAL: $" + total.toLocaleString("es-MX",{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        });
-
-    }
-
-}
-
-
-
-// Aumentar cantidad
-
-function aumentarCantidad(nombre){
-
-
-    let producto = carrito.find(p => p.nombre === nombre);
-
-
-    producto.cantidad++;
-
-
-    verCarrito();
-
-    actualizarCarrito();
-
-
-}
-
-
-
-// Disminuir cantidad
-
-function disminuirCantidad(nombre){
-
-
-    let producto = carrito.find(p => p.nombre === nombre);
-
-
-
-    if(producto.cantidad > 1){
-
-
-        producto.cantidad--;
-
-
-    }else{
-
-
-        eliminarProducto(nombre);
-
-
-    }
-
-
-
-    verCarrito();
-
-    actualizarCarrito();
-
-
-}
-
-
-
-
-// Eliminar producto
-
-function eliminarProducto(nombre){
-
-
-    carrito = carrito.filter(p => p.nombre !== nombre);
-
-
-
-    verCarrito();
-
-    actualizarCarrito();
-
-
-}
-
-
-// Vaciar carrito
-
-function vaciarCarrito(){
-
-    carrito = [];
-
-   localStorage.removeItem("clienteSeleccionadoCODMAR");
-
-    actualizarCarrito();
-
-    verCarrito();
-
-}
-
-
-// Cerrar carrito
-
-function cerrarCarrito(){
-
-
-    document.getElementById("carritoVentana").style.display="none";
-
-
-}
-
-// =========================
-//   ENVIAR PEDIDO WHATSAPP
-// =========================
-
-function enviarWhatsApp(){
-
-    if(carrito.length === 0){
-        alert("El carrito está vacío.");
-        return;
-    }
-
-    let clienteSeleccionado =
-        JSON.parse(localStorage.getItem("clienteSeleccionadoCODMAR"));
-
-    if(!clienteSeleccionado){
-        alert("Primero selecciona un cliente.");
-        return;
-    }
-
-    let mensaje = "";
-
- <h1>CODMAR PRUEBA 123</h1>
-    mensaje += "Distribuidora Farmacéutica y Comercializadora\n\n";
-
-    mensaje += "Cliente: " +
-        clienteSeleccionado.nombre + "\n\n";
-
-    mensaje += "Cant  Artículo              P.Unit      Importe\n";
-    mensaje += "----------------------------------------------------\n";
-
-    let total = 0;
-
-    carrito.forEach(function(producto){
-
-        let subtotal =
-            producto.precio * producto.cantidad;
-
-        let cantidad =
-            String(producto.cantidad).padEnd(5);
-
-        let articulo =
-            producto.nombre.substring(0,22).padEnd(22);
-
-        let precioUnitario =
-            "$" + producto.precio.toLocaleString("es-MX",{
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            });
-
-        let importe =
-            "$" + subtotal.toLocaleString("es-MX",{
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            });
-
-        mensaje +=
-            cantidad +
-            articulo +
-            precioUnitario.padStart(10) +
-            importe.padStart(12) +
-            "\n";
-
-        total += subtotal;
-
-    });
-
-    mensaje +=
-        "----------------------------------------------------\n";
-
-    mensaje +=
-        "TOTAL: $" +
-        total.toLocaleString("es-MX",{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }) +
-        "\n";
-
-      alert(mensaje);
- 
-    let enlaceWhatsApp =
-        "https://wa.me/?text=" +
-        encodeURIComponent(mensaje);
-
-    console.log(mensaje);
-    console.log(enlaceWhatsApp);
-
-    window.open(enlaceWhatsApp, "_blank");
-}
-
-
-// =========================
-//      MODAL PRODUCTO
-// =========================
-
-let productoModal = null;
-
-function abrirProducto(imagen, nombre, precio){
-
-    productoModal = {
-        imagen: imagen,
-        nombre: nombre,
-        precio: precio
-    };
-
-    document.getElementById("modalImagen").src =
-    "imagenes/" + imagen;
-
-    document.getElementById("modalNombre").innerHTML =
-    nombre;
-
-    document.getElementById("modalPrecio").innerHTML =
-    "$" + precio;
-
-    document.getElementById("modalProducto").style.display =
-    "block";
-
-}
-
-document.getElementById("cerrarModal").onclick = function(){
-
-    document.getElementById("modalProducto").style.display =
-    "none";
-
-};
-
-window.onclick = function(event){
-
-    if(event.target == document.getElementById("modalProducto")){
-
-        document.getElementById("modalProducto").style.display =
-        "none";
-
-    }
-
-};
-
-
-
-document.getElementById("agregarModal").onclick = function(){
-
-    agregarCarrito(
-        productoModal.nombre,
-        productoModal.precio,
-        productoModal.imagen
-    );
-
-    document.getElementById("modalProducto").style.display =
-    "none";
-
-};
-
-
-
-// =========================
-//       CARGAR CSV
-// =========================
-
-
-fetch("productos.csv")
-
-
-.then(respuesta => respuesta.text())
-
-
-.then(datos => {
-
-
-
-const filas = datos.split("\n");
-
-
-const catalogo = document.getElementById("catalogo");
-
-
-const buscar = document.getElementById("buscar");
-
-
-const volverCatalogo = document.getElementById("volverCatalogo");
-
-
-
-window.productos = [];
-
-
-
-for(let i=1;i<filas.length;i++){
-
-
-
-    let columnas = filas[i].split(",");
-
-
-
-    if(columnas.length>=4){
-
-
-
-       window.productos.push({
-
-
-            imagen:columnas[0].trim(),
-
-
-            nombre:columnas[1].trim(),
-
-
-            precio:columnas[2].trim(),
-
-            categoria:columnas[3].trim(),
-
-
-
-        });
-
-
-
-    }
-
-
-
-}
-
-
-
-
-function mostrarProductos(lista){
-
-    catalogo.innerHTML="";
-
-    lista.forEach(producto=>{
-
-        catalogo.innerHTML += `
-
-        <div class="producto">
-
-        <img
-        src="imagenes/${producto.imagen}"
-        onclick="abrirProducto(
-        '${producto.imagen}',
-        '${producto.nombre}',
-        '${producto.precio}'
-        )"
-        style="cursor:pointer;">
-
-        <h3>${producto.nombre}</h3>
-
-        <p>
-        <strong>
-        $${producto.precio}
-        </strong>
-        </p>
+    <div class="opcion-encabezado">
 
         <button
-
-        class="boton-carrito"
-
-        onclick="agregarCarrito('${producto.nombre}','${producto.precio}','${producto.imagen}')">
-
-        ➕ Agregar al carrito
-
+            type="button"
+            id="boton-logotipo">
+            SELECCIONAR ARCHIVO
         </button>
 
-        </div>
+        <input
+            type="file"
+            id="archivo-logotipo"
+            accept="image/*"
+            hidden>
 
-        `;
+    </div>
 
-    });
+    <div id="vista-logotipo">
+        Ningún archivo seleccionado
+    </div>
 
-}
+    <div class="opcion-encabezado posicion-logotipo-control">
 
+        <label>Posición del logotipo</label>
 
-mostrarProductos(
-    window.productos.filter(function(producto){
-        return producto.categoria.toLowerCase().includes("medicamentos");
-    })
-);
+      <div class="control-flechas-logotipo control-posicion-logotipo">
 
-actualizarCarrito();
-
-
-
-
-// Mostrar Medicamentos
-
-window.mostrarMedicamentos = function(){
-
-    let medicamentos = window.productos.filter(function(producto){
-
-        return producto.categoria.toLowerCase().includes("medicamentos");
-
-    });
-
-    mostrarProductos(medicamentos);
-
-};
-
-
-
-
-// Mostrar Material de Curación
-
-
-
-window.mostrarMaterial = function(){
-
-    let material = window.productos.filter(function(producto){
-
-        return producto.categoria.toLowerCase().includes("material");
-
-    });
-
-    mostrarProductos(material);
-
-};
-
-
-
-// Mostrar Perfumería
-
-window.mostrarPerfumeria = function(){
-
-    let perfumeria = window.productos.filter(function(producto){
-
-        return producto.categoria.toLowerCase().includes("perfumeria");
-
-    });
-
-    mostrarProductos(perfumeria);
-
-};   
-
-
-
-// Mostrar Misceláneos
-
-window.mostrarMiscelaneos = function(){
-
-    let miscelaneos = window.productos.filter(function(producto){
-
-        return producto.categoria.toLowerCase().includes("miscelaneos");
-
-    });
-
-    mostrarProductos(miscelaneos);
-
-};
-
-
-
-
-window.mostrarSimilares = function(){
-
-    alert("Similares en construcción");
-
-};
-
-
-window.mostrarPatente = function(){
-
-    alert("Patente en construcción");
-
-};
-
-
-
-
-
-// Buscador
-
-
-buscar.addEventListener("keyup", function () {
-
-    let texto = buscar.value.toLowerCase();
-
-    let filtrados = productos.filter(function(producto){
-
-        return producto.nombre.toLowerCase().includes(texto);
-
-    });
-
-    mostrarProductos(filtrados);
-
-    if(texto !== ""){
-        volverCatalogo.style.display = "block";
-    }else{
-        volverCatalogo.style.display = "none";
-    }
-
-});
-
-
-volverCatalogo.addEventListener("click", function(){
-
-    buscar.value = "";
-
-    mostrarMedicamentos();
-
-    volverCatalogo.style.display = "none";
-
-});
-
-// =========================
-//      BOTONES CARRITO
-// =========================
-
-
-document.getElementById("enviarWhatsAppPagina").onclick = enviarWhatsApp;
-
-
-document.getElementById("vaciarCarritoPagina").onclick = vaciarCarrito;
-
-
-document.getElementById("volverCatalogoPagina").onclick = volverCatalogoCarrito;
-
-
-
-function volverCatalogoCarrito(){
-
-    document.getElementById("paginaCarrito").style.display = "none";
-
-    document.getElementById("catalogo").style.display = "";
-
-    document.getElementById("verCarrito").style.display = "block";
-
-}
-
-
-});
-
-
-// =========================
-//      PÁGINA CLIENTES
-// =========================
-
-function verClientes(){
-
-    document.getElementById("paginaCarrito").style.display = "none";
-
-    document.getElementById("paginaClientes").style.display = "block";
-
-    mostrarClientes();
-
-}
-
-// Volver de Clientes al carrito
-
-document.getElementById("volverCarritoClientes").onclick = function(){
-
-    document.getElementById("paginaClientes").style.display = "none";
-
-    document.getElementById("paginaCarrito").style.display = "block";
-
-};
-
-// =========================
-//    AGREGAR CLIENTE
-// =========================
-
-document.getElementById("agregarCliente").onclick = function(){
-
-    document.getElementById("formularioCliente").style.display = "block";
-
-};
-// =========================
-//      GUARDAR CLIENTE
-// =========================
-
-document.getElementById("guardarCliente").onclick = function(){
-
-    let nombre =
-        document.getElementById("nombreCliente").value.trim();
-
-    let whatsapp =
-        document.getElementById("whatsappCliente").value.replace(/\D/g, "");
-
-   if(nombre === ""){
-
-    alert("Por favor escribe el nombre del cliente.");
-
-    return;
-}
-
-    let clientes =
-        JSON.parse(localStorage.getItem("clientesCODMAR")) || [];
-       
-      let clienteExistente = clientes.find(function(cliente){
-
-    return cliente.nombre.toLowerCase() === nombre.toLowerCase();
-
-});
-    
-    if(clienteExistente){
-
-        alert("Este número de WhatsApp ya está registrado.");
-
-        return;
-    }
-
-    // AGREGAR NUEVO CLIENTE
-
-    clientes.push({
-        nombre: nombre,
-        whatsapp: whatsapp
-    });
-
-    // GUARDAR LA LISTA ACTUALIZADA
-
-    localStorage.setItem(
-        "clientesCODMAR",
-        JSON.stringify(clientes)
-    );
-
-    // ACTUALIZAR LA LISTA EN PANTALLA
-
-    mostrarClientes();
-
-    // OCULTAR FORMULARIO
-
-    document.getElementById("formularioCliente").style.display = "none";
-
-    // LIMPIAR CAMPOS
-
-    document.getElementById("nombreCliente").value = "";
-
-    document.getElementById("whatsappCliente").value = "";
-
-    alert("Cliente guardado correctamente.");
-
-};
-
-
-
-// =========================
-//    MOSTRAR CLIENTES
-// =========================
-
-function mostrarClientes(){
-
-    let clientes = JSON.parse(localStorage.getItem("clientesCODMAR")) || [];
-
-    let lista = document.getElementById("listaClientes");
-
-    lista.innerHTML = "";
-
-    if(clientes.length === 0){
-
-        lista.innerHTML =
-        "<p style='text-align:center;'>No hay clientes registrados.</p>";
-
-        return;
-    }
-
-    clientes.forEach(function(cliente, indice){
-
-        lista.innerHTML += `
-
-        <div style="
-            margin:15px auto;
-            padding:15px;
-            max-width:500px;
-            background:white;
-            border-radius:10px;
-            box-shadow:0 2px 8px rgba(0,0,0,.15);
-        ">
-
-            <h3 style="margin:0;">
-                👤 ${cliente.nombre}
-            </h3>
-
-            <p style="margin:8px 0;">
-                📱 ${cliente.whatsapp}
-            </p>
-
-            <button onclick="seleccionarCliente(${indice})"
-                style="
-                    background:#0d6efd;
-                    color:white;
-                    border:none;
-                    border-radius:6px;
-                    padding:8px 15px;
-                    cursor:pointer;
-                    margin-right:8px;
-                ">
-                👤 Seleccionar
+            <button
+                type="button"
+                id="flecha-logotipo-arriba"
+                aria-label="Subir logotipo">
+                ▲
             </button>
 
-            <button onclick="eliminarCliente(${indice})"
-                style="
-                    background:#d32f2f;
-                    color:white;
-                    border:none;
-                    border-radius:6px;
-                    padding:8px 15px;
-                    cursor:pointer;
-                ">
-                🗑️ Eliminar
+            <button
+                type="button"
+                id="flecha-logotipo-izquierda"
+                aria-label="Mover logotipo a la izquierda">
+                ◀
+            </button>
+
+           <span id="valor-ajuste-logotipo"></span>
+
+            <button
+                type="button"
+                id="flecha-logotipo-derecha"
+                aria-label="Mover logotipo a la derecha">
+                ▶
+            </button>
+
+            <button
+                type="button"
+                id="flecha-logotipo-abajo"
+                aria-label="Bajar logotipo">
+                ▼
             </button>
 
         </div>
 
-        `;
+    </div>
 
-    });
+    <button
+        type="button"
+        id="aceptar-logotipo">
+        ACEPTAR
+    </button>
 
-}
-// =========================
-//     ELIMINAR CLIENTE
-// =========================
-
-function eliminarCliente(indice){
-
-    let clientes = JSON.parse(localStorage.getItem("clientesCODMAR")) || [];
-
-    let cliente = clientes[indice];
-
-    if(!cliente){
-        return;
-    }
-
-    let confirmar = confirm(
-        "¿Quieres eliminar a " + cliente.nombre + "?"
-    );
-
-    if(!confirmar){
-        return;
-    }
-
-    clientes.splice(indice, 1);
-
-    localStorage.setItem(
-        "clientesCODMAR",
-        JSON.stringify(clientes)
-    );
-
-    mostrarClientes();
-
-}
+</div>
 
 
 
-// =========================
-//   SELECCIONAR CLIENTE
-// =========================
+        <!-- ========================================= -->
+        <!--      CONFIGURACIÓN DEL NOMBRE COMERCIAL   -->
+        <!-- ========================================= -->
 
-function seleccionarCliente(indice){
+        <div
+            class="formulario-inicio"
+            id="formulario-nombre-comercial">
 
-    let clientes = JSON.parse(localStorage.getItem("clientesCODMAR")) || [];
+            <h2>CONFIGURACIÓN DEL NOMBRE COMERCIAL</h2>
 
-    let cliente = clientes[indice];
+            <div class="opcion-encabezado">
 
-    if(!cliente){
-        return;
-    }
+                <label for="nombre-comercial">
+                    Nombre comercial
+                </label>
 
-    localStorage.setItem(
-        "clienteSeleccionadoCODMAR",
-        JSON.stringify(cliente)
-    );
+                <input
+                    type="text"
+                    id="nombre-comercial"
+                    placeholder="Escribe el nombre de tu negocio">
 
-    alert(
-        "Cliente seleccionado: " + cliente.nombre
-    );
+            </div>
 
-    document.getElementById("paginaClientes").style.display = "none";
+            <div class="opcion-encabezado">
 
-    document.getElementById("paginaCarrito").style.display = "block";
+                <label for="fuente-nombre-comercial">
+                    Tipo de letra
+                </label>
 
-    verCarrito();
-}
+                <select id="fuente-nombre-comercial">
+                    <option value="Arial">Arial</option>
+                    <option value="Calibri">Calibri</option>
+                    <option value="Cambria">Cambria</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Lucida Console">Lucida Console</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Arial Narrow">Arial Narrow</option>
+                    <option value="Franklin Gothic Medium">Franklin Gothic Medium</option>
+                    <option value="Garamond">Garamond</option>
+                    <option value="Book Antiqua">Book Antiqua</option>
+                    <option value="Century Gothic">Century Gothic</option>
+                    <option value="Palatino Linotype">Palatino Linotype</option>
+                    <option value="Segoe UI">Segoe UI</option>
+                    <option value="Roboto">Roboto</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Montserrat">Montserrat</option>
+                    <option value="Poppins">Poppins</option>
+                </select>
+
+            </div>
+
+            <div class="opcion-encabezado">
+
+                <label for="tamano-nombre-comercial">
+                    Tamaño de letra
+                </label>
+
+                <select id="tamano-nombre-comercial">
+                    <option value="14px">14</option>
+                    <option value="16px">16</option>
+                    <option value="18px">18</option>
+                    <option value="20px">20</option>
+                    <option value="24px">24</option>
+                    <option value="28px">28</option>
+                    <option value="32px">32</option>
+                    <option value="36px">36</option>
+                    <option value="40px">40</option>
+                    <option value="48px">48</option>
+                    <option value="56px">56</option>
+                    <option value="64px">64</option>
+                    <option value="72px">72</option>
+                    <option value="80px">80</option>
+                    <option value="96px">96</option>
+                    <option value="112px">112</option>
+                    <option value="128px">128</option>
+                </select>
+
+            </div>
+
+            <div
+                class="opcion-encabezado posicion-nombre-comercial-control">
+
+                <label>Posición del nombre comercial</label>
+
+                <div class="control-posicion-nombre-comercial">
+
+                    <button
+                        type="button"
+                        id="flecha-nombre-comercial-arriba"
+                        aria-label="Subir nombre comercial">
+                        ▲
+                    </button>
+
+                    <button
+                        type="button"
+                        id="flecha-nombre-comercial-izquierda"
+                        aria-label="Mover nombre comercial a la izquierda">
+                        ◀
+                    </button>
+
+                    <span id="centro-nombre-comercial">
+                        Centro
+                    </span>
+
+                    <button
+                        type="button"
+                        id="flecha-nombre-comercial-derecha"
+                        aria-label="Mover nombre comercial a la derecha">
+                        ▶
+                    </button>
+
+                    <button
+                        type="button"
+                        id="flecha-nombre-comercial-abajo"
+                        aria-label="Bajar nombre comercial">
+                        ▼
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="opcion-encabezado mostrar-nombre-comercial">
+
+                <label for="mostrar-nombre-comercial">
+                    Mostrar nombre comercial
+                </label>
+
+                <input
+                    type="checkbox"
+                    id="mostrar-nombre-comercial"
+                    checked>
+
+            </div>
+
+            <button
+                id="aceptar-nombre-comercial"
+                type="button">
+                ACEPTAR
+            </button>
+
+        </div>
+
+    </div>
+    <!-- FIN DE pagina-inicio -->
 
 
+    <!-- ========================================= -->
+    <!--              ARCHIVOS JAVASCRIPT          -->
+    <!-- ========================================= -->
 
-</script>
-
-</body>
-
-</html>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
 
 
